@@ -1,0 +1,11 @@
+{
+	"name": "cyan/portal-importer",
+	"type": "project",
+	"license": "gpl",
+	"autoload": {
+		"psr-4": {
+			"Cyan\\PortalImporter\\": "src/includes/"
+		}
+	},
+	"require": {}
+}
