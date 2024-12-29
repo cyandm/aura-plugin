@@ -79,8 +79,13 @@ class Helpers {
 	}
 
 	public static function checkExistProductBySku( $sku ) {
-		$product = wc_get_product_id_by_sku( $sku );
-		return $product ? true : false;
+		$product = new \WP_Query( [ 
+			'post_type' => 'product',
+			'post_status' => [ 'publish', 'draft', 'trash' ],
+			'meta_key' => '_sku',
+			'meta_value' => $sku,
+		] );
+		return $product->have_posts() ? true : false;
 	}
 
 	public static function uploadImage( $url, $post_id ) {

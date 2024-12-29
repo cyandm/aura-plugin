@@ -15,6 +15,7 @@ define( 'PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'PLUGIN_NAME', 'cyn-portal-importer' );
 define( 'PLUGIN_VERSION', '1.0' );
+define( 'ENV', 'development' );
 
 require_once PLUGIN_DIR . 'vendor/autoload.php';
 

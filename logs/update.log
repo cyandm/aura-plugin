@@ -1,0 +1,82 @@
+2024-12-28 15:06:28 - --------------------------- Init product updater ---------------------------
+2024-12-28 15:06:28 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/166886653
+2024-12-28 15:06:28 - processing Product id: 166886653
+2024-12-28 15:06:28 - Product with id 166886653 not found
+2024-12-28 15:06:28 - Get all products from api: https://mobomobo.ir/site/api/v1/store/products?size=20&page=20
+2024-12-28 15:06:28 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/166884233
+2024-12-28 15:06:28 - processing Product id: 166884233
+2024-12-28 15:06:28 - Product with id 166884233 not found
+2024-12-28 15:06:30 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/166862705
+2024-12-28 15:06:30 - processing Product id: 166862705
+2024-12-28 15:06:30 - Product with id 166862705 not found
+2024-12-28 15:06:30 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/166946264
+2024-12-28 15:06:30 - processing Product id: 166946264
+2024-12-28 15:06:30 - Product with id 166946264 not found
+2024-12-28 15:06:31 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/166862063
+2024-12-28 15:06:31 - processing Product id: 166862063
+2024-12-28 15:06:31 - Product with id 166862063 not found
+2024-12-28 15:06:31 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/166945179
+2024-12-28 15:06:31 - processing Product id: 166945179
+2024-12-28 15:06:31 - Product with id 166945179 not found
+2024-12-28 15:06:31 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/166861993
+2024-12-28 15:06:31 - processing Product id: 166861993
+2024-12-28 15:06:31 - Product with id 166861993 not found
+2024-12-28 15:06:32 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/166846897
+2024-12-28 15:06:32 - processing Product id: 166846897
+2024-12-28 15:06:32 - Product with id 166846897 not found
+2024-12-28 15:06:32 - --------------------------- End product updater ---------------------------
+2024-12-28 15:06:33 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/166931588
+2024-12-28 15:06:33 - processing Product id: 166931588
+2024-12-28 15:06:33 - Product with id 166931588 not found
+2024-12-28 15:06:36 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/166931531
+2024-12-28 15:06:36 - processing Product id: 166931531
+2024-12-28 15:06:36 - Product with id 166931531 not found
+2024-12-28 15:06:37 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/166931475
+2024-12-28 15:06:37 - processing Product id: 166931475
+2024-12-28 15:06:37 - Product with id 166931475 not found
+2024-12-28 15:06:37 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/166931425
+2024-12-28 15:06:37 - processing Product id: 166931425
+2024-12-28 15:06:37 - Product with id 166931425 not found
+2024-12-28 15:06:37 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/166928827
+2024-12-28 15:06:37 - processing Product id: 166928827
+2024-12-28 15:06:37 - Product with id 166928827 not found
+2024-12-28 15:06:39 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/166928065
+2024-12-28 15:06:39 - processing Product id: 166928065
+2024-12-28 15:06:39 - Product with id 166928065 not found
+2024-12-28 15:06:40 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/166918859
+2024-12-28 15:06:40 - processing Product id: 166918859
+2024-12-28 15:06:40 - Product with id 166918859 not found
+2024-12-28 15:06:41 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/166914282
+2024-12-28 15:06:41 - processing Product id: 166914282
+2024-12-28 15:06:41 - Product with id 166914282 not found
+2024-12-28 15:06:41 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/166914273
+2024-12-28 15:06:41 - processing Product id: 166914273
+2024-12-28 15:06:41 - Product with id 166914273 not found
+2024-12-28 15:06:42 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/166904174
+2024-12-28 15:06:42 - processing Product id: 166904174
+2024-12-28 15:06:42 - Product with id 166904174 not found
+2024-12-28 15:06:43 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/166901342
+2024-12-28 15:06:43 - processing Product id: 166901342
+2024-12-28 15:06:43 - Product with id 166901342 not found
+2024-12-28 15:06:43 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/166889890
+2024-12-28 15:06:43 - processing Product id: 166889890
+2024-12-28 15:06:43 - Product with id 166889890 not found
+2024-12-28 15:06:44 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/166886653
+2024-12-28 15:06:44 - processing Product id: 166886653
+2024-12-28 15:06:44 - Product with id 166886653 not found
+2024-12-28 15:06:47 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/166884233
+2024-12-28 15:06:47 - processing Product id: 166884233
+2024-12-28 15:06:47 - Product with id 166884233 not found
+2024-12-28 15:06:50 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/166862705
+2024-12-28 15:06:50 - processing Product id: 166862705
+2024-12-28 15:06:50 - Product with id 166862705 not found
+2024-12-28 15:06:51 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/166862063
+2024-12-28 15:06:51 - processing Product id: 166862063
+2024-12-28 15:06:51 - Product with id 166862063 not found
+2024-12-28 15:06:51 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/166861993
+2024-12-28 15:06:51 - processing Product id: 166861993
+2024-12-28 15:06:51 - Product with id 166861993 not found
+2024-12-28 15:06:52 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/166846897
+2024-12-28 15:06:52 - processing Product id: 166846897
+2024-12-28 15:06:52 - Product with id 166846897 not found
+2024-12-28 15:06:52 - --------------------------- End product updater ---------------------------

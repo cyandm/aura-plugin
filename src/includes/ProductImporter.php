@@ -15,20 +15,25 @@ class ProductImporter {
 	private $endpointProducts = '/site/api/v1/store/products';
 	private $timeout = 30;
 	private $count;
+	private $page;
 	private $percentage;
 
 
 	public function __construct() {
 
 		$this->count = get_option( PLUGIN_NAME . '_count', 3 );
+		$this->page = get_option( PLUGIN_NAME . '_page', 1 );
 		$this->percentage = get_option( PLUGIN_NAME . '_percentage', 40 );
 	}
 
-	public static function init( $count, $percentage ) {
+	public static function init( $count, $percentage, $page ) {
+		Logger::log( "--------------------------- Init product importer ---------------------------" );
 		$instance = new self();
 		$instance->setCount( $count );
 		$instance->setPercentage( $percentage );
+		$instance->setPage( $page );
 		$instance->processProductGroup();
+		Logger::log( "--------------------------- End product importer ---------------------------" );
 	}
 
 	//----------------- Setters ----------------
@@ -42,6 +47,11 @@ class ProductImporter {
 		update_option( PLUGIN_NAME . '_percentage', $percentage );
 	}
 
+	public function setPage( $page ) {
+		$this->page = $page;
+		update_option( PLUGIN_NAME . '_page', $page );
+	}
+
 	//----------------- Getters ----------------
 	public function getCount() {
 		return $this->count;
@@ -51,18 +61,25 @@ class ProductImporter {
 		return $this->percentage;
 	}
 
+	public function getPage() {
+		return $this->page;
+	}
+
 	private function getStore() {
 
 		$url = add_query_arg( [ 
 			'size' => $this->count,
+			'page' => $this->page,
 		], $this->baseUrl . $this->endpointProducts );
 
 		$response = wp_remote_get( $url, [ 
 			'timeout' => $this->timeout,
 		] );
 
+		Logger::log( "Get all products from api: " . $url );
+
 		if ( is_wp_error( $response ) ) {
-			error_log( "Get all products from api failed: " . $response->get_error_message() );
+			Logger::log( "Get all products from api failed: " . $response->get_error_message() );
 			return false;
 		}
 
@@ -75,9 +92,10 @@ class ProductImporter {
 		$url = $this->baseUrl . $this->endpointProducts . '/' . $id;
 
 		$response = wp_remote_get( $url, [ 'timeout' => $this->timeout ] );
+		Logger::log( "Get single product from api: " . $url );
 
 		if ( is_wp_error( $response ) ) {
-			error_log( "Get single product from api failed: " . $response->get_error_message() );
+			Logger::log( "Get single product from api failed: " . $response->get_error_message() );
 			return false;
 		}
 
@@ -88,19 +106,25 @@ class ProductImporter {
 	// -------------- Creators --------------
 
 	private function createVariableProduct( $product_from_api ) {
+		Logger::log( "Create variable product: " . $product_from_api['id'] );
+
 		$product = new WC_Product_Variable();
 		$product->set_name( $product_from_api['title'] );
 		$product->set_sku( $product_from_api['id'] );
 		$product->set_status( 'publish' );
+		$product->set_stock_status( $product_from_api['available'] ? 'instock' : 'outofstock' );
 		$product->save();
 		return $product;
 	}
 
 	private function createSimpleProduct( $product_from_api ) {
+		Logger::log( "Create simple product: " . $product_from_api['id'] );
+
 		$product = new WC_Product();
 		$product->set_name( $product_from_api['title'] );
 		$product->set_sku( $product_from_api['id'] );
 		$product->set_status( 'publish' );
+		$product->set_stock_status( $product_from_api['available'] ? 'instock' : 'outofstock' );
 		$product->save();
 		return $product;
 	}
@@ -133,10 +157,13 @@ class ProductImporter {
 	}
 
 	private function processProduct( $product_from_group ) {
+
+		Logger::log( "Process product: " . $product_from_group['id'] );
+
 		$product_from_api = $this->getProduct( $product_from_group['id'] );
 
 		if ( ! $product_from_api ) {
-			error_log( "Product not found: " . $product_from_group['id'] );
+			Logger::log( "Product not found: " . $product_from_group['id'] );
 			return;
 		}
 
@@ -145,7 +172,7 @@ class ProductImporter {
 		$sku = $product_from_api['id'];
 
 		if ( Helpers::checkExistProductBySku( $sku ) ) {
-			echo "Product with id $sku already exists";
+			Logger::log( "Product with id <b>$sku</b> already exists" );
 			return;
 		}
 
@@ -170,10 +197,13 @@ class ProductImporter {
 
 		$product->save();
 
+		Logger::log( "Product saved: " . $product->get_id() );
+
 		wc_delete_product_transients( $product->get_id() );
 	}
 
 	private function processProductImages( WC_Product $product, $product_from_api ) {
+		Logger::log( "Process product images: " . $product_from_api['id'] );
 
 		//Upload feature image
 		$url = $this->baseUrl . $product_from_api['images'][0]['path'];
@@ -202,6 +232,8 @@ class ProductImporter {
 	}
 
 	private function processProductAttributes( WC_Product $product, $product_from_api ) {
+		Logger::log( "Process product attributes: " . $product_from_api['id'] );
+
 		$attributes = $product_from_api['attributes'];
 
 		foreach ( $attributes as $attr ) {
@@ -257,7 +289,14 @@ class ProductImporter {
 
 	//TODO: need refactor for two model of variants
 	private function processProductVariants( WC_Product $product, $product_from_api ) {
+		Logger::log( "Process product variants: " . $product_from_api['id'] );
+
 		$attributes = $product_from_api['attributes'];
+
+		if ( empty( $attributes ) ) {
+			return $product;
+		}
+
 		$product_id = $product->get_id();
 
 		$combinations = $this->createCombinations( array_column( $attributes, 'values' ) );
@@ -289,6 +328,8 @@ class ProductImporter {
 						$variation->set_price( $price );
 						$variation->set_regular_price( $price );
 						$variation->set_stock_status( $variant['available'] ? 'instock' : 'outofstock' );
+						$variation->set_sku( $variant['id'] );
+
 						$variation->save();
 					}
 				}
@@ -305,6 +346,8 @@ class ProductImporter {
 
 	//TODO: need refactor for break down function
 	private function processProductCategories( WC_Product $product, $product_from_api ) {
+		Logger::log( "Process product categories: " . $product_from_api['id'] );
+
 		$product_id = $product->get_id();
 		$categories = $product_from_api['categories'];
 

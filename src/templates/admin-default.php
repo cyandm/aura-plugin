@@ -6,16 +6,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use Cyan\PortalImporter\ProductImporter;
 
-if ( isset( $_POST['import_products'] ) ) {
-	$count = intval( $_POST['count'] );
-	$percentage = intval( $_POST['percentage'] );
-
-	ProductImporter::init( $count, $percentage );
-}
-
 $importer = new ProductImporter();
 $count = $importer->getCount();
 $percentage = $importer->getPercentage();
+$page = $importer->getPage();
 
 ?>
 
@@ -25,7 +19,11 @@ $percentage = $importer->getPercentage();
 	<h2>تعداد محصولات و درصد افزایش قیمت را وارد کنید و سپس فرآیند درون ریزی را آغاز کنید.</h2>
 
 	<form method="post"
-		  action="">
+		  action=""
+		  hx-post="<?php echo rest_url( 'product-importer/v1/import' ); ?>"
+		  hx-target="#result"
+		  hx-on::before-request="console.log('request is running');"
+		  hx-on::after-request="console.log('request is done');">
 		<table class="form-table">
 			<tbody>
 				<tr>
@@ -57,6 +55,21 @@ $percentage = $importer->getPercentage();
 						% درصد
 					</td>
 				</tr>
+				<tr>
+					<th scope="row">
+						<label for="page">صفحه:</label>
+					</th>
+					<td>
+						<input type="number"
+							   id="page"
+							   name="page"
+							   value="<?php echo esc_attr( $page ); ?>"
+							   min="1"
+							   class="small-text">
+					</td>
+				</tr>
+
+
 			</tbody>
 		</table>
 
@@ -67,5 +80,8 @@ $percentage = $importer->getPercentage();
 				   value="شروع درون ریزی">
 		</p>
 	</form>
+
+	<pre dir="ltr"
+		 id="result"></pre>
 
 </div>

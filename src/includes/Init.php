@@ -9,7 +9,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Init {
 	public static function init() {
 		Menu::init();
-		CronUpdater::init();
+		Assets::init();
+		Rest::init();
+		Logger::init();
 	}
 }
 
