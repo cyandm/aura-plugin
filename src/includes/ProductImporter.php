@@ -287,7 +287,6 @@ class ProductImporter {
 		return $product;
 	}
 
-	//TODO: need refactor for two model of variants
 	private function processProductVariants( WC_Product $product, $product_from_api ) {
 		Logger::log( "Process product variants: " . $product_from_api['id'] );
 
@@ -316,22 +315,31 @@ class ProductImporter {
 					sanitize_title( $value )
 				);
 
-				foreach ( $product_from_api['variants'] as $variant ) {
 
-					$variant_model = explode( ':', $variant['title'] )[1] ?? '';
-					$variant_model = trim( $variant_model );
+			}
 
-					$price = $variant['price'] + ( $variant['price'] * $this->percentage / 100 );
+			foreach ( $product_from_api['variants'] as $variant ) {
 
-					// If the title of the variant matches the combination value
-					if ( $variant_model === $value ) {
-						$variation->set_price( $price );
-						$variation->set_regular_price( $price );
-						$variation->set_stock_status( $variant['available'] ? 'instock' : 'outofstock' );
-						$variation->set_sku( $variant['id'] );
+				$title = $variant['title'];
+				$price = $variant['price'] + ( $variant['price'] * $this->percentage / 100 );
 
-						$variation->save();
-					}
+
+				$variant_model = explode( '،', $title );
+				$variant_checker = [];
+
+				foreach ( $variant_model as $model ) {
+					$arr_item = explode( ':', $model );
+					array_push( $variant_checker, trim( $arr_item[1] ) );
+				}
+
+				// If the title of the variant matches the combination value
+				if ( $variant_checker === $combination ) {
+					$variation->set_price( $price );
+					$variation->set_regular_price( $price );
+					$variation->set_stock_status( $variant['available'] ? 'instock' : 'outofstock' );
+					$variation->set_sku( $variant['id'] );
+
+					$variation->save();
 				}
 			}
 
