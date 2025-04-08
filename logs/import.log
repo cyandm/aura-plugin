@@ -1,0 +1,12 @@
+2025-04-08 16:08:24 - --------------------------- Init product importer ---------------------------
+2025-04-08 16:08:25 - Get all products from api: https://mobomobochap.ir/site/api/v1/store/products?size=1&page=9
+2025-04-08 16:08:25 - Process product: 172913695
+2025-04-08 16:08:25 - Get single product from api: https://mobomobochap.ir/site/api/v1/store/products/172913695
+2025-04-08 16:08:25 - Create variable product: 172913695
+2025-04-08 16:08:26 - Process product variants: 172913695
+2025-04-08 16:08:40 - Process product images: 172913695
+2025-04-08 16:09:00 - Process product attributes: 172913695
+2025-04-08 16:09:01 - Process product categories: 172913695
+2025-04-08 16:09:01 - Setting product timestamp to: 1743942720
+2025-04-08 16:09:01 - Product saved: 20188
+2025-04-08 16:09:01 - --------------------------- End product importer ---------------------------

@@ -3,6 +3,26 @@
   var __commonJS = (cb, mod) => function __require() {
     return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
   };
+  var __async = (__this, __arguments, generator) => {
+    return new Promise((resolve, reject) => {
+      var fulfilled = (value) => {
+        try {
+          step(generator.next(value));
+        } catch (e2) {
+          reject(e2);
+        }
+      };
+      var rejected = (value) => {
+        try {
+          step(generator.throw(value));
+        } catch (e2) {
+          reject(e2);
+        }
+      };
+      var step = (x2) => x2.done ? resolve(x2.value) : Promise.resolve(x2.value).then(fulfilled, rejected);
+      step((generator = generator.apply(__this, __arguments)).next());
+    });
+  };
 
   // node_modules/htmx.org/dist/htmx.min.js
   var require_htmx_min = __commonJS({
@@ -3070,7 +3090,147 @@
   // src/assets/js/functions/htmx.js
   window.htmx = require_htmx_min();
 
+  // src/assets/js/functions/logReader.js
+  function logReader() {
+    const logType = document.querySelector("#importProductsForm") ? "import" : "update";
+    jQuery.ajax({
+      url: restDetails.url + "product-importer/v1/log/".concat(logType),
+      method: "GET",
+      success: function(response) {
+        const textarea = document.querySelector("#log-content");
+        if (textarea) {
+          textarea.value = response;
+          textarea.scrollTop = textarea.scrollHeight;
+        }
+      }
+    });
+  }
+  var logInterval;
+  function startLogMonitoring() {
+    logReader();
+    logInterval = setInterval(logReader, 2e4);
+  }
+
+  // src/assets/js/functions/importAjaxHandler.js
+  function importProductsOnFormSubmit() {
+    const form = document.querySelector("#importProductsForm");
+    if (form) {
+      console.log("import products is running");
+      form.addEventListener("submit", function(e2) {
+        e2.preventDefault();
+        startLogMonitoring();
+        const formData = new FormData(form);
+        importProductAjax(formData);
+      });
+    }
+  }
+  function importProductAjax(formData) {
+    jQuery(document).ready(function($2) {
+      $2.ajax({
+        url: restDetails.url + "product-importer/v1/import",
+        type: "POST",
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+          return __async(this, null, function* () {
+            const { page, totalPages } = response;
+            console.log("page: ".concat(page, " imported successfully"));
+            if (page > totalPages || page < 1) {
+              console.log("all products imported");
+              const notification = document.createElement("div");
+              notification.className = "custom-notification";
+              const content = document.createElement("div");
+              content.className = "notification-content";
+              content.textContent = "\u2705 \u0627\u06CC\u0645\u067E\u0648\u0631\u062A \u0645\u062D\u0635\u0648\u0644\u0627\u062A \u0628\u0627 \u0645\u0648\u0641\u0642\u06CC\u062A \u0627\u0646\u062C\u0627\u0645 \u0634\u062F";
+              const button = document.createElement("button");
+              button.className = "notification-button";
+              button.textContent = "\u0645\u062A\u0648\u062C\u0647 \u0634\u062F\u0645";
+              button.onclick = () => {
+                notification.classList.remove("show");
+                setTimeout(() => notification.remove(), 300);
+              };
+              notification.appendChild(content);
+              notification.appendChild(button);
+              document.body.appendChild(notification);
+              setTimeout(() => notification.classList.add("show"), 100);
+              return;
+            }
+            formData.set("page", parseInt(page) + 1);
+            yield new Promise((resolve) => setTimeout(resolve, 35e3));
+            importProductAjax(formData);
+          });
+        },
+        error: function(error) {
+          console.error("Error importing page ".concat(formData.get("page"), ":"), error);
+        }
+      });
+    });
+  }
+
+  // src/assets/js/functions/updateAjaxHandler.js
+  function updateProductsOnFormSubmit() {
+    const form = document.querySelector("#updateProductsForm");
+    if (form) {
+      console.log("update products is running");
+      form.addEventListener("submit", function(e2) {
+        e2.preventDefault();
+        startLogMonitoring();
+        const formData = new FormData(form);
+        updateProductAjax(formData);
+      });
+    }
+  }
+  function updateProductAjax(formData) {
+    jQuery(document).ready(function($2) {
+      $2.ajax({
+        url: restDetails.url + "product-importer/v1/update",
+        type: "POST",
+        data: formData,
+        cache: false,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+          return __async(this, null, function* () {
+            const { page, totalPages } = response;
+            console.log("page: ".concat(page, " updated successfully"));
+            if (page > totalPages || page < 1) {
+              console.log("all products updated");
+              const notification = document.createElement("div");
+              notification.className = "custom-notification";
+              const content = document.createElement("div");
+              content.className = "notification-content";
+              content.textContent = "\u2705 \u0622\u067E\u062F\u06CC\u062A \u0645\u062D\u0635\u0648\u0644\u0627\u062A \u0628\u0627 \u0645\u0648\u0641\u0642\u06CC\u062A \u0627\u0646\u062C\u0627\u0645 \u0634\u062F";
+              const button = document.createElement("button");
+              button.className = "notification-button";
+              button.textContent = "\u0645\u062A\u0648\u062C\u0647 \u0634\u062F\u0645";
+              button.onclick = () => {
+                notification.classList.remove("show");
+                setTimeout(() => notification.remove(), 300);
+              };
+              notification.appendChild(content);
+              notification.appendChild(button);
+              document.body.appendChild(notification);
+              setTimeout(() => notification.classList.add("show"), 100);
+              return;
+            }
+            formData.set("page", parseInt(page) + 1);
+            yield new Promise((resolve) => setTimeout(resolve, 35e3));
+            updateProductAjax(formData);
+          });
+        },
+        error: function(error) {
+          console.error("Error updating page ".concat(formData.get("page"), ":"), error);
+        }
+      });
+    });
+  }
+
   // src/assets/js/index.js
   console.log("java script is working");
+  importProductsOnFormSubmit();
+  updateProductsOnFormSubmit();
+  logReader();
 })();
 //# sourceMappingURL=admin.js.map
