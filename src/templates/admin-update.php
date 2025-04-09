@@ -44,14 +44,14 @@ $totalProductsCount = (int)$totalProductsCount;
 								<input type="radio"
 									name="base_url"
 									value="https://mobomobo.ir"
-									<?php checked($baseUrl, 'https://mobomobo.ir'); ?>>
+									<?php checked($baseUrl, 'https://mobomobo.ir'); ?> checked>
 								موبوموبو
 							</label><br>
-							<label>
+							<label style="opacity: 0.6; cursor: not-allowed;">
 								<input type="radio"
 									name="base_url"
 									value="https://mobomobochap.ir"
-									<?php checked($baseUrl, 'https://mobomobochap.ir'); ?>>
+									<?php //checked($baseUrl, 'https://mobomobochap.ir'); ?> disabled>
 								موبوچاپ
 							</label>
 						</fieldset>

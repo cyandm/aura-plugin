@@ -37,14 +37,14 @@ $totalProductsCount = 2;
 								<input type="radio"
 									name="base_url"
 									value="https://mobomobo.ir"
-									<?php checked($baseUrl, 'https://mobomobo.ir'); ?>>
+									<?php checked($baseUrl, 'https://mobomobo.ir'); ?> checked>
 								موبوموبو
 							</label><br>
-							<label>
+							<label style="opacity: 0.6; cursor: not-allowed;">
 								<input type="radio"
 									name="base_url"
 									value="https://mobomobochap.ir"
-									<?php checked($baseUrl, 'https://mobomobochap.ir'); ?>>
+									<?php //checked($baseUrl, 'https://mobomobochap.ir'); ?> disabled>
 								موبوچاپ
 							</label>
 						</fieldset>
@@ -170,23 +170,23 @@ $totalProductsCount = 2;
 	}
 
 	.notification-close {
-	    background: none;
-	    border: none;
-	    color: white;
-	    font-size: 24px;
-	    cursor: pointer;
-	    padding: 0 0 0 10px;
-	    margin-right: 10px;
-	    opacity: 0.8;
+		background: none;
+		border: none;
+		color: white;
+		font-size: 24px;
+		cursor: pointer;
+		padding: 0 0 0 10px;
+		margin-right: 10px;
+		opacity: 0.8;
 	}
 
 	.notification-close:hover {
-	    opacity: 1;
+		opacity: 1;
 	}
 
 	.custom-notification {
-	    display: flex;
-	    align-items: center;
-	    justify-content: space-between;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 	}
 </style>

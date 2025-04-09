@@ -1,12 +1,6 @@
-2025-04-08 16:08:24 - --------------------------- Init product importer ---------------------------
-2025-04-08 16:08:25 - Get all products from api: https://mobomobochap.ir/site/api/v1/store/products?size=1&page=9
-2025-04-08 16:08:25 - Process product: 172913695
-2025-04-08 16:08:25 - Get single product from api: https://mobomobochap.ir/site/api/v1/store/products/172913695
-2025-04-08 16:08:25 - Create variable product: 172913695
-2025-04-08 16:08:26 - Process product variants: 172913695
-2025-04-08 16:08:40 - Process product images: 172913695
-2025-04-08 16:09:00 - Process product attributes: 172913695
-2025-04-08 16:09:01 - Process product categories: 172913695
-2025-04-08 16:09:01 - Setting product timestamp to: 1743942720
-2025-04-08 16:09:01 - Product saved: 20188
-2025-04-08 16:09:01 - --------------------------- End product importer ---------------------------
+2025-04-09 13:16:42 - --------------------------- Init product importer ---------------------------
+2025-04-09 13:16:47 - Get all products from api: https://mobomobo.ir/site/api/v1/store/products?size=1&page=9
+2025-04-09 13:16:47 - Process product: 172661676
+2025-04-09 13:16:51 - Get single product from api: https://mobomobo.ir/site/api/v1/store/products/172661676
+2025-04-09 13:16:51 - Product with id <b>172661676</b> already exists
+2025-04-09 13:16:51 - --------------------------- End product importer ---------------------------
