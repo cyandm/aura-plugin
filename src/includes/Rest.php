@@ -107,7 +107,8 @@ class Rest
 		$logHtml = '';
 		foreach ($logLines as $line) {
 			if (!empty(trim($line))) {
-				$logHtml .= '<p>' . $line;
+				//$logHtml .= '<p>' . $line;
+				$logHtml .= $line . "\n";
 			}
 		}
 		return rest_ensure_response($logHtml);
